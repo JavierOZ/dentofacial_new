@@ -39,13 +39,13 @@ function App() {
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb', minHeight: '100vh' }}>
       {/* Sección de bienvenida visual con imagen realista de sonrisas */}
       <section style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1601924582975-4d6e4b09453b?auto=format&fit=crop&w=1470&q=80)',
-        backgroundSize: 'cover',
+        backgroundImage: 'url(/img/smile1.jpg)',
         backgroundPosition: 'center',
-        color: '#fff',
+        backgroundSize: 'cover',
         padding: '6rem 2rem 4rem',
         textAlign: 'center'
-      }}>
+        color: '#fff',
+}}>
         <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>
           Bienvenido a Clínica Estética Dentofacial
         </h1>
