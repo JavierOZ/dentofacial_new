@@ -36,34 +36,45 @@ function App() {
   };
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fdf7f9', minHeight: '100vh' }}>
-      {/* Sección de bienvenida visual con fondo y color ajustado */}
-      <section style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1599058917212-d750089bc07f?auto=format&fit=crop&w=1470&q=80)', backgroundSize: 'cover', backgroundPosition: 'center', color: '#fff', padding: '4rem 2rem', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>Bienvenido a Clínica Estética Dentofacial</h1>
-        <p style={{ fontSize: '1.3rem', maxWidth: '600px', margin: '0 auto', textShadow: '0 1px 4px rgba(0,0,0,0.2)' }}>Sonríe con confianza. Salud, estética y bienestar en un solo lugar.</p>
+    <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb', minHeight: '100vh' }}>
+      {/* Sección de bienvenida visual con imagen realista de sonrisas */}
+      <section style={{
+        backgroundImage: 'url(https://images.unsplash.com/photo-1601924582975-4d6e4b09453b?auto=format&fit=crop&w=1470&q=80)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        color: '#fff',
+        padding: '6rem 2rem 4rem',
+        textAlign: 'center'
+      }}>
+        <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>
+          Bienvenido a Clínica Estética Dentofacial
+        </h1>
+        <p style={{ fontSize: '1.3rem', maxWidth: '600px', margin: '0 auto', textShadow: '0 1px 4px rgba(0,0,0,0.2)' }}>
+          Sonríe con confianza. Salud, estética y bienestar en un solo lugar.
+        </p>
       </section>
 
       {/* Sección de servicios destacados */}
       <section style={{ backgroundColor: '#ffffff', padding: '3rem 2rem', textAlign: 'center' }}>
-        <h2 style={{ color: '#2c3e50', marginBottom: '2rem' }}>Nuestros Servicios</h2>
+        <h2 style={{ color: '#662c91', marginBottom: '2rem' }}>Nuestros Servicios</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2rem' }}>
           <div style={{ width: '250px', padding: '1rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', backgroundColor: '#f9f9f9' }}>
-            <h3 style={{ color: '#16a085' }}>Odontología General</h3>
+            <h3 style={{ color: '#1fbabf' }}>Odontología General</h3>
             <p>Diagnóstico, prevención y tratamiento para una salud bucal integral.</p>
           </div>
           <div style={{ width: '250px', padding: '1rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', backgroundColor: '#f9f9f9' }}>
-            <h3 style={{ color: '#16a085' }}>Ortodoncia</h3>
+            <h3 style={{ color: '#1fbabf' }}>Ortodoncia</h3>
             <p>Tratamientos personalizados para alinear tu sonrisa.</p>
           </div>
           <div style={{ width: '250px', padding: '1rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', backgroundColor: '#f9f9f9' }}>
-            <h3 style={{ color: '#16a085' }}>Estética Dental</h3>
+            <h3 style={{ color: '#1fbabf' }}>Estética Dental</h3>
             <p>Blanqueamiento, carillas y todo lo necesario para una sonrisa radiante.</p>
           </div>
         </div>
       </section>
 
       {/* Formulario de contacto */}
-      <section style={{ background: '#ffffff', borderRadius: '8px', padding: '2rem', maxWidth: '600px', margin: '2rem auto', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+      <section style={{ background: '#fef6fb', borderRadius: '8px', padding: '2rem', maxWidth: '600px', margin: '2rem auto', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
         <h2 style={{ textAlign: 'center', color: '#34495e' }}>Agenda tu hora</h2>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', gap: '1rem' }}>
@@ -73,12 +84,12 @@ function App() {
           <input type="email" placeholder="Correo" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
           <input type="tel" placeholder="Teléfono" value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
           <textarea placeholder="Mensaje" value={form.mensaje} onChange={(e) => setForm({ ...form, mensaje: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', resize: 'vertical' }} />
-          <button type="submit" style={{ padding: '0.7rem', backgroundColor: '#27ae60', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Enviar</button>
+          <button type="submit" style={{ padding: '0.7rem', backgroundColor: '#a051c4', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Enviar</button>
         </form>
       </section>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#2c3e50', color: '#ecf0f1', padding: '1rem', textAlign: 'center' }}>
+      <footer style={{ backgroundColor: '#662c91', color: '#ecf0f1', padding: '1rem', textAlign: 'center' }}>
         <p>&copy; {new Date().getFullYear()} Clínica Dentofacial | contacto@clinicadentofacial.cl</p>
         <div style={{ marginTop: '0.5rem' }}>
           <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1' }}>Facebook</a>
