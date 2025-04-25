@@ -48,7 +48,7 @@ function App() {
           apellido: form.apellido,
           email: form.email,
           telefono: form.telefono,
-          mensaje: form.mensaje,
+          motivo: form.motivo,
           fechaDeseada: form.fechaDeseada,
           fecha: new Date().toISOString(),
         },
