@@ -21,11 +21,10 @@ function App() {
     }
 
     try {
-      // Validar si la fecha es feriado usando API pública
       const feriadoCheck = await fetch(`https://api.victorsanmartin.com/feriados/${form.fechaDeseada}`);
       const resultadoFeriado = await feriadoCheck.json();
-
-      if (resultadoFeriado.data && resultadoFeriado.data.length > 0) {
+    
+      if (resultadoFeriado && resultadoFeriado.data && Array.isArray(resultadoFeriado.data) && resultadoFeriado.data.length > 0) {
         alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
         return;
       }
