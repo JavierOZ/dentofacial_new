@@ -15,13 +15,21 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const dia = new Date(form.fechaDeseada).getDay();
-      if (dia === 0) {
-        setMensaje("❌ No se pueden agendar horas los días domingo.");
-        return;
-      }
 
+    if (!form.fechaDeseada) {
+      setMensaje("❌ Debes seleccionar una fecha.");
+      return;
+    }
+
+    const fechaSeleccionada = new Date(form.fechaDeseada);
+    const dia = fechaSeleccionada.getDay();
+
+    if (dia === 0) {
+      setMensaje("❌ No se pueden agendar horas los días domingo.");
+      return;
+    }
+
+    try {
       const feriadoResp = await fetch(`/api/feriados?fecha=${form.fechaDeseada}`);
       const feriadoData = await feriadoResp.json();
 
@@ -124,7 +132,7 @@ function Home() {
             onChange={(e) => {
               let input = e.target.value;
               if (!input.startsWith("+569")) input = "+569";
-              const soloNumeros = input.slice(4).replace(/\\D/g, "").slice(0, 8);
+              const soloNumeros = input.slice(4).replace(/\D/g, "").slice(0, 8);
               setForm({ ...form, telefono: "+569" + soloNumeros });
             }}
             required
