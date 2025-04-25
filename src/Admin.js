@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 function Admin() {
   const [registros, setRegistros] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [autenticado, setAutenticado] = useState(false);
+  const [clave, setClave] = useState('');
 
   useEffect(() => {
     async function cargarDatos() {
@@ -19,6 +21,34 @@ function Admin() {
 
     cargarDatos();
   }, []);
+
+  if (!autenticado) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '4rem', fontFamily: 'Arial, sans-serif' }}>
+        <h2>Acceso restringido</h2>
+        <p>Por favor, ingrese la contraseña para continuar</p>
+        <input
+          type="password"
+          value={clave}
+          onChange={(e) => setClave(e.target.value)}
+          placeholder="Contraseña"
+          style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', marginRight: '0.5rem' }}
+        />
+        <button
+          onClick={() => {
+            if (clave === '@Clinica.2025::') {
+              setAutenticado(true);
+            } else {
+              alert('Contraseña incorrecta');
+            }
+          }}
+          style={{ padding: '0.5rem 1rem', backgroundColor: '#a051c4', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+        >
+          Ingresar
+        </button>
+      </div>
+    );
+  }
 
   if (cargando) {
     return <div style={{ textAlign: 'center', marginTop: '2rem' }}>Cargando registros...</div>;
