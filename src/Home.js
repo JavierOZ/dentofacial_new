@@ -21,8 +21,8 @@ function Home() {
       return;
     }
 
-    const fechaSeleccionada = new Date(form.fechaDeseada);
-    const dia = fechaSeleccionada.getDay();
+    // Calcular el día de la semana en UTC para evitar problemas de zona horaria
+    const dia = new Date(form.fechaDeseada + 'T12:00:00').getUTCDay();
 
     if (dia === 0) {
       setMensaje("❌ No se pueden agendar horas los días domingo.");
@@ -151,6 +151,15 @@ function Home() {
         </form>
         {mensaje && <p style={{ marginTop: '1rem', color: mensaje.startsWith('✅') ? 'green' : 'red' }}>{mensaje}</p>}
       </section>
+    {/* Footer */}
+    <footer style={{ backgroundColor: '#662c91', color: '#ecf0f1', padding: '1rem', textAlign: 'center', marginTop: '2rem' }}>
+      <p>&copy; {new Date().getFullYear()} Clínica Dentofacial | dentofacial.contacto@gmail.com</p>
+      <div style={{ marginTop: '0.5rem' }}>
+        <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1', textDecoration: 'none' }}>Facebook</a>
+        <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1', textDecoration: 'none' }}>Instagram</a>
+        <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1', textDecoration: 'none' }}>WhatsApp</a>
+      </div>
+    </footer>
     </div>
   );
 }
