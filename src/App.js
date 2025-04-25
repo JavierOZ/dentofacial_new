@@ -12,7 +12,7 @@ function App() {
       return;
     }
 
-    const fechaElegida = new Date(form.fechaDeseada + 'T00:00');
+    const fechaElegida = new Date(form.fechaDeseada);
     const esDomingo = fechaElegida.getDay() === 0;
 
     if (esDomingo) {
@@ -151,14 +151,13 @@ function App() {
         </form>
       </section>
 
-
       {/* Footer */}
-      <footer style={{ backgroundColor: '#662c91', color: '#ecf0f1', padding: '1rem', textAlign: 'center' }}>
-        <p>&copy; {new Date().getFullYear()} Clínica Dentofacial | Dentofacial.contacto@gmail.com</p>
+      <footer style={{ backgroundColor: '#662c91', color: '#ecf0f1', padding: '1rem', textAlign: 'center', marginTop: '2rem' }}>
+        <p>&copy; {new Date().getFullYear()} Clínica Dentofacial | dentofacial.contacto@gmail.com</p>
         <div style={{ marginTop: '0.5rem' }}>
-          <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1' }}>Facebook</a>
-          <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1' }}>Instagram</a>
-          <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1' }}>WhatsApp</a>
+          <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1', textDecoration: 'none' }}>Facebook</a>
+          <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1', textDecoration: 'none' }}>Instagram</a>
+          <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1', textDecoration: 'none' }}>WhatsApp</a>
         </div>
       </footer>
     </div>
