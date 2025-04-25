@@ -60,7 +60,7 @@ function Admin() {
           Ingresar
         </button>
       </div>
-    );
+    ;
   }
 
   if (cargando) {
