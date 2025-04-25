@@ -9,7 +9,7 @@ function Home() {
       
       {/* Hero principal */}
       <section style={{
-        backgroundImage: 'url("/img/smile2.jpg")', // Aquí usas tu imagen real
+        backgroundImage: 'url("/img/smile2.jpg")', // Recuerda agregar una imagen bonita en /public/img
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         color: '#fff',
