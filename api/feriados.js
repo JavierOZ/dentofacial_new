@@ -6,11 +6,9 @@ export default async function handler(req, res) {
       const data = await api.json();
   
       const esFeriado =
-        data &&
-        data.status === true &&
-        data.data &&
-        typeof data.data.nombre === 'string' &&
-        data.data.nombre.trim() !== '';
+        data?.status === true &&
+        typeof data?.data?.nombre === 'string' &&
+        data.data.nombre.trim().length > 0;
   
       res.status(200).json({ esFeriado });
     } catch (error) {
