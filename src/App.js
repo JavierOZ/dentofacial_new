@@ -49,7 +49,7 @@ function App() {
           email: form.email,
           telefono: form.telefono,
           motivo: form.motivo,
-          fechaDeseada: form.fechaDeseada,
+          fechaDeseada: new Date(form.fechaDeseada).toLocaleDateString('es-CL'),
           fecha: new Date().toISOString(),
         },
       };
