@@ -43,8 +43,8 @@ function App() {
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         padding: '6rem 2rem 4rem',
-        textAlign: 'center'
-        color: '#fff',
+        textAlign: 'center',
+        color: '#fff'
 }}>
         <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>
           Bienvenido a Clínica Estética Dentofacial
