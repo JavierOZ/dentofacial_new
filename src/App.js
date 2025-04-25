@@ -25,7 +25,14 @@ function App() {
       const resultadoFeriado = await feriadoCheck.json();
       console.log("Respuesta de API de feriados:", resultadoFeriado);
 
-      if (resultadoFeriado?.data?.nombre?.trim()) {
+      const esFeriado =
+        resultadoFeriado &&
+        resultadoFeriado.status === true &&
+        resultadoFeriado.data &&
+        typeof resultadoFeriado.data.nombre === 'string' &&
+        resultadoFeriado.data.nombre.trim().length > 0;
+
+      if (esFeriado) {
         alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
         return;
       }
