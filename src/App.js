@@ -22,11 +22,12 @@ function App() {
         alert("Este correo ya está registrado en una solicitud de hora");
         return;
       }
-      if (!/^\\+569\\d{8}$/.test(form.telefono)) {
+
+      if (!/^\+569\d{8}$/.test(form.telefono)) {
         alert("El teléfono debe tener el formato +569 seguido de 8 dígitos numéricos.");
         return;
       }
-      }
+
       const payload = {
         data: {
           nombre: form.nombre,
@@ -51,7 +52,8 @@ function App() {
         alert("Hubo un error al enviar 😥");
       }
     } catch (error) {
-      alert("Error de conexión o servidor");
+      console.error("Error en la solicitud:", error);
+      alert("Ocurrió un error inesperado al enviar.");
     }
   };
 
