@@ -21,19 +21,11 @@ function App() {
     }
 
     try {
-      const feriadoCheck = await fetch(`https://api.victorsanmartin.com/feriados/${form.fechaDeseada}`);
+      const feriadoCheck = await fetch('https://apis.digital.gob.cl/fl/feriados');
       const resultadoFeriado = await feriadoCheck.json();
-      console.log("resultadoFeriado:", resultadoFeriado);
+      const fechaFeriado = resultadoFeriado.find(f => f.fecha === form.fechaDeseada);
 
-      if (
-        resultadoFeriado &&
-        resultadoFeriado.status === true &&
-        resultadoFeriado.data &&
-        typeof resultadoFeriado.data === 'object' &&
-        resultadoFeriado.data !== null &&
-        resultadoFeriado.data.nombre &&
-        resultadoFeriado.data.nombre.trim() !== ''
-      ) {
+      if (fechaFeriado) {
         alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
         return;
       }
