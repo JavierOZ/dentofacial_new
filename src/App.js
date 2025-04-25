@@ -24,7 +24,12 @@ function App() {
       const feriadoCheck = await fetch(`https://api.victorsanmartin.com/feriados/${form.fechaDeseada}`);
       const resultadoFeriado = await feriadoCheck.json();
     
-      if (resultadoFeriado && resultadoFeriado.data && Array.isArray(resultadoFeriado.data) && resultadoFeriado.data.length > 0) {
+      if (
+        resultadoFeriado &&
+        resultadoFeriado.data &&
+        typeof resultadoFeriado.data.nombre === 'string' &&
+        resultadoFeriado.data.nombre.trim() !== ''
+      ) {
         alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
         return;
       }
