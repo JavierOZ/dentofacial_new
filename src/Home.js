@@ -7,7 +7,7 @@ function Home() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb' }}>
       <section style={{
-        backgroundImage: 'url("/img/sonrisa-hero.jpg")',
+        backgroundImage: 'url("/img/smile2.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         color: '#fff',
