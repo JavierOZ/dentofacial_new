@@ -27,9 +27,12 @@ function App() {
       if (
         resultadoFeriado &&
         resultadoFeriado.data &&
-        typeof resultadoFeriado.data.nombre === 'string' &&
-        resultadoFeriado.data.nombre.trim() !== ''
+        resultadoFeriado.data.nombre &&
+        resultadoFeriado.data.nombre.trim().length > 0
       ) {
+        alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
+        return;
+      } {
         alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
         return;
       }
