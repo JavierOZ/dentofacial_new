@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', telefono: '', mensaje: '' });
+  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', telefono: '+569', mensaje: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      data: {
-        nombre: form.nombre,
-        apellido: form.apellido,
-        email: form.email,
-        telefono: form.telefono,
-        mensaje: form.mensaje,
-        fecha: new Date().toISOString(),
-      },
-    };
+    // Validación de formato de correo
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      alert("Por favor, ingresa un correo válido (formato correo@algo.com)");
+      return;
+    }
 
     try {
-      const response = await fetch("https://sheetdb.io/api/v1/wy7rmfutsrihe", {
+      // Verificar si el correo ya existe en la base de datos (SheetDB)
+      const check = await fetch(`https://sheetdb.io/api/v1/wy7rmfutsrihe/search?email=${form.email}`);
+      const checkResult = await check.json();
+
+      if (checkResult.length > 0) {
+        alert("Este correo ya está registrado en una solicitud de hora");
+        return;
+      }
+
+      const payload = {
+        data: {
+          nombre: form.nombre,
+          apellido: form.apellido,
+          email: form.email,
+          telefono: form.telefono,
+          mensaje: form.mensaje,
+          fecha: new Date().toISOString(),
+        },
+      };
+
+      const response = await fetch("https://sheetdb.io/api/v1/TU_ID_DE_SHEETDB", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -26,7 +42,7 @@ function App() {
 
       if (response.ok) {
         alert("Mensaje enviado correctamente ✅");
-        setForm({ nombre: '', apellido: '', email: '', telefono: '', mensaje: '' });
+        setForm({ nombre: '', apellido: '', email: '', telefono: '+569', mensaje: '' });
       } else {
         alert("Hubo un error al enviar 😥");
       }
