@@ -134,8 +134,18 @@ function App() {
             required
             style={{ padding: "0.5rem", borderRadius: "4px", border: "1px solid #ccc" }}
           />
-          <textarea placeholder="Mensaje" value={form.mensaje} onChange={(e) => setForm({ ...form, mensaje: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', resize: 'vertical' }} />
-          <label style={{ fontSize: '0.9rem', color: '#333' }}>Fecha propuesta para atención:</label>
+         <label style={{ fontSize: '0.9rem', color: '#333' }}>Motivo de la consulta:</label>
+          <select value={form.motivo} onChange={(e) => setForm({ ...form, motivo: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}>
+            <option value="">Seleccione un motivo</option>
+            <option value="Revisión de diagnóstico">Revisión de diagnóstico</option>
+            <option value="Limpieza dental">Limpieza dental</option>
+            <option value="Blanqueamiento dental">Blanqueamiento dental</option>
+            <option value="Endodoncia (Tratamiento de conducto)">Endodoncia (Tratamiento de conducto)</option>
+            <option value="Corona">Corona</option>
+            <option value="Implante dental">Implante dental</option>
+            <option value="Tratamiento periodontal">Tratamiento periodontal</option>
+            <option value="Radiografías dentales">Radiografías dentales</option>
+          </select>
           <input type="date" value={form.fechaDeseada} onChange={(e) => setForm({ ...form, fechaDeseada: e.target.value })} required min={hoy} style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
           <button type="submit" style={{ padding: '0.7rem', backgroundColor: '#a051c4', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Enviar</button>
         </form>
@@ -144,7 +154,7 @@ function App() {
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#662c91', color: '#ecf0f1', padding: '1rem', textAlign: 'center' }}>
-        <p>&copy; {new Date().getFullYear()} Clínica Dentofacial | contacto@clinicadentofacial.cl</p>
+        <p>&copy; {new Date().getFullYear()} Clínica Dentofacial | Dentofacial.contacto@gmail.com</p>
         <div style={{ marginTop: '0.5rem' }}>
           <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1' }}>Facebook</a>
           <a href="#" style={{ margin: '0 0.5rem', color: '#ecf0f1' }}>Instagram</a>
