@@ -22,7 +22,10 @@ function App() {
         alert("Este correo ya está registrado en una solicitud de hora");
         return;
       }
-
+      if (!/^\\+569\\d{8}$/.test(form.telefono)) {
+        alert("El teléfono debe tener el formato +569 seguido de 8 dígitos numéricos.");
+        return;
+      }
       const payload = {
         data: {
           nombre: form.nombre,
@@ -98,7 +101,23 @@ function App() {
             <input type="text" placeholder="Apellido" value={form.apellido} onChange={(e) => setForm({ ...form, apellido: e.target.value })} required style={{ flex: 1, padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
           </div>
           <input type="email" placeholder="Correo" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
-          <input type="tel" placeholder="Teléfono" value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
+          <input
+  type="tel"
+  placeholder="Teléfono"
+  value={form.telefono}
+  onChange={(e) => {
+    const input = e.target.value;
+    if (!input.startsWith("+569")) return; // evita borrar +569
+    const soloNumeros = input.slice(4).replace(/\\D/g, ""); // quita todo lo que no sea número después del +569
+    setForm({ ...form, telefono: "+569" + soloNumeros });
+  }}
+  required
+  style={{
+    padding: "0.5rem",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
+  }}
+/>
           <textarea placeholder="Mensaje" value={form.mensaje} onChange={(e) => setForm({ ...form, mensaje: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', resize: 'vertical' }} />
           <button type="submit" style={{ padding: '0.7rem', backgroundColor: '#a051c4', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Enviar</button>
         </form>
