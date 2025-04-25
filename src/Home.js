@@ -72,7 +72,7 @@ function Home() {
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb' }}>
       {/* HERO */}
       <section style={{
-        backgroundImage: 'url("/img/smile2.jpg")',
+        backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/img/smile2.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         color: '#fff',
