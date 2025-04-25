@@ -1,11 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const navigate = useNavigate();
+  const [form, setForm] = useState({
+    nombre: '',
+    apellido: '',
+    email: '',
+    telefono: '+569',
+    motivo: '',
+    fechaDeseada: ''
+  });
+  const [mensaje, setMensaje] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        data: {
+          nombre: form.nombre,
+          apellido: form.apellido,
+          email: form.email,
+          telefono: form.telefono,
+          motivo: form.motivo,
+          fechaDeseada: form.fechaDeseada,
+          fecha: new Date().toISOString()
+        }
+      };
+
+      const response = await fetch("https://sheetdb.io/api/v1/wy7rmfutsrihe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        setMensaje("✅ Tu solicitud ha sido enviada correctamente.");
+        setForm({ nombre: '', apellido: '', email: '', telefono: '+569', motivo: '', fechaDeseada: '' });
+      } else {
+        setMensaje("❌ Ocurrió un error al enviar. Inténtalo nuevamente.");
+      }
+    } catch (error) {
+      console.error("Error al enviar:", error);
+      setMensaje("❌ Error inesperado. Inténtalo más tarde.");
+    }
+  };
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb' }}>
+      {/* HERO */}
       <section style={{
         backgroundImage: 'url("/img/smile2.jpg")',
         backgroundSize: 'cover',
@@ -20,7 +63,7 @@ function Home() {
       }}>
         <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Confianza que se nota en tu sonrisa</h1>
         <p style={{ fontSize: '1.5rem', marginBottom: '2rem' }}>Clínica Estética Dentofacial</p>
-        <button 
+        <button
           onClick={() => navigate('/#formulario')}
           style={{ padding: '1rem 2rem', backgroundColor: '#a051c4', border: 'none', borderRadius: '8px', color: 'white', fontSize: '1.2rem', cursor: 'pointer' }}
         >
@@ -28,6 +71,7 @@ function Home() {
         </button>
       </section>
 
+      {/* SERVICIOS */}
       <section style={{ padding: '4rem 2rem', textAlign: 'center' }}>
         <h2 style={{ marginBottom: '3rem', color: '#333' }}>Nuestros Servicios</h2>
         <div style={{
@@ -51,25 +95,39 @@ function Home() {
         </div>
       </section>
 
-      {/* Formulario de contacto */}
+      {/* FORMULARIO */}
       <section id="formulario" style={{ padding: '4rem 2rem', backgroundColor: '#ffffff', textAlign: 'center' }}>
         <h2 style={{ marginBottom: '2rem', color: '#333' }}>Agenda tu hora</h2>
-        <form action="https://sheetdb.io/api/v1/wy7rmfutsrihe" method="post" style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <input type="text" name="data[nombre]" placeholder="Nombre" required style={inputStyle} />
-          <input type="text" name="data[apellido]" placeholder="Apellido" required style={inputStyle} />
-          <input type="email" name="data[email]" placeholder="Correo electrónico" required style={inputStyle} />
-          <input type="tel" name="data[telefono]" placeholder="+56912345678" required style={inputStyle} />
-          <select name="data[motivo]" required style={inputStyle}>
+        <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <input type="text" name="nombre" placeholder="Nombre" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} required style={inputStyle} />
+          <input type="text" name="apellido" placeholder="Apellido" value={form.apellido} onChange={(e) => setForm({ ...form, apellido: e.target.value })} required style={inputStyle} />
+          <input type="email" name="email" placeholder="Correo electrónico" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required style={inputStyle} />
+          <input
+            type="tel"
+            name="telefono"
+            placeholder="+56912345678"
+            value={form.telefono}
+            onChange={(e) => {
+              let input = e.target.value;
+              if (!input.startsWith("+569")) input = "+569";
+              const soloNumeros = input.slice(4).replace(/\\D/g, "").slice(0, 8);
+              setForm({ ...form, telefono: "+569" + soloNumeros });
+            }}
+            required
+            style={inputStyle}
+          />
+          <select name="motivo" value={form.motivo} onChange={(e) => setForm({ ...form, motivo: e.target.value })} required style={inputStyle}>
             <option value="">Seleccione un motivo</option>
             {servicios.map((servicio, idx) => (
               <option key={idx} value={servicio}>{servicio}</option>
             ))}
           </select>
-          <input type="date" name="data[fechaDeseada]" required style={inputStyle} />
+          <input type="date" name="fechaDeseada" value={form.fechaDeseada} onChange={(e) => setForm({ ...form, fechaDeseada: e.target.value })} required style={inputStyle} />
           <button type="submit" style={{ padding: '1rem', backgroundColor: '#a051c4', border: 'none', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>
             Enviar
           </button>
         </form>
+        {mensaje && <p style={{ marginTop: '1rem', color: mensaje.startsWith('✅') ? 'green' : 'red' }}>{mensaje}</p>}
       </section>
     </div>
   );
