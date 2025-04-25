@@ -12,7 +12,24 @@ function App() {
       return;
     }
 
+    const fechaElegida = new Date(form.fechaDeseada);
+    const esDomingo = fechaElegida.getDay() === 0;
+
+    if (esDomingo) {
+      alert("No se pueden agendar horas los días domingo.");
+      return;
+    }
+
     try {
+      // Validar si la fecha es feriado usando API pública
+      const feriadoCheck = await fetch(`https://api.victorsanmartin.com/feriados/${form.fechaDeseada}`);
+      const resultadoFeriado = await feriadoCheck.json();
+
+      if (resultadoFeriado.data && resultadoFeriado.data.length > 0) {
+        alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
+        return;
+      }
+
       const check = await fetch(`https://sheetdb.io/api/v1/wy7rmfutsrihe/search?email=${form.email}`);
       const checkResult = await check.json();
 
@@ -56,7 +73,6 @@ function App() {
     }
   };
 
-  // Obtener la fecha de hoy en formato YYYY-MM-DD
   const hoy = new Date().toISOString().split("T")[0];
 
   return (
