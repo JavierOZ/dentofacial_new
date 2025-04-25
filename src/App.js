@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', telefono: '+569', mensaje: '' });
+  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', telefono: '+569', mensaje: '', fechaDeseada: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de formato de correo
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       alert("Por favor, ingresa un correo válido (formato correo@algo.com)");
@@ -14,7 +13,6 @@ function App() {
     }
 
     try {
-      // Verificar si el correo ya existe en la base de datos (SheetDB)
       const check = await fetch(`https://sheetdb.io/api/v1/wy7rmfutsrihe/search?email=${form.email}`);
       const checkResult = await check.json();
 
@@ -35,6 +33,7 @@ function App() {
           email: form.email,
           telefono: form.telefono,
           mensaje: form.mensaje,
+          fechaDeseada: form.fechaDeseada,
           fecha: new Date().toISOString(),
         },
       };
@@ -47,7 +46,7 @@ function App() {
 
       if (response.ok) {
         alert("Mensaje enviado correctamente ✅");
-        setForm({ nombre: '', apellido: '', email: '', telefono: '+569', mensaje: '' });
+        setForm({ nombre: '', apellido: '', email: '', telefono: '+569', mensaje: '', fechaDeseada: '' });
       } else {
         alert("Hubo un error al enviar 😥");
       }
@@ -56,6 +55,9 @@ function App() {
       alert("Ocurrió un error inesperado al enviar.");
     }
   };
+
+  // Obtener la fecha de hoy en formato YYYY-MM-DD
+  const hoy = new Date().toISOString().split("T")[0];
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb', minHeight: '100vh' }}>
@@ -110,27 +112,20 @@ function App() {
             value={form.telefono}
             onChange={(e) => {
               let input = e.target.value;
-
-              // Evita borrar el prefijo +569
-              if (!input.startsWith("+569")) {
-                input = "+569";
-              }
-
-              // Solo permitir dígitos después de +569
-              const soloNumeros = input.slice(4).replace(/\\D/g, "").slice(0, 8); // máximo 8 dígitos
+              if (!input.startsWith("+569")) input = "+569";
+              const soloNumeros = input.slice(4).replace(/\D/g, "").slice(0, 8);
               setForm({ ...form, telefono: "+569" + soloNumeros });
             }}
             required
-            style={{
-              padding: "0.5rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-            }}
-/>
+            style={{ padding: "0.5rem", borderRadius: "4px", border: "1px solid #ccc" }}
+          />
           <textarea placeholder="Mensaje" value={form.mensaje} onChange={(e) => setForm({ ...form, mensaje: e.target.value })} required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', resize: 'vertical' }} />
+          <label style={{ fontSize: '0.9rem', color: '#333' }}>Fecha propuesta para atención:</label>
+          <input type="date" value={form.fechaDeseada} onChange={(e) => setForm({ ...form, fechaDeseada: e.target.value })} required min={hoy} style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }} />
           <button type="submit" style={{ padding: '0.7rem', backgroundColor: '#a051c4', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Enviar</button>
         </form>
       </section>
+
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#662c91', color: '#ecf0f1', padding: '1rem', textAlign: 'center' }}>
