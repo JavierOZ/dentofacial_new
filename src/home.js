@@ -6,10 +6,8 @@ function Home() {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#fef6fb' }}>
-      
-      {/* Hero principal */}
       <section style={{
-        backgroundImage: 'url("/img/smile2.jpg")', // Recuerda agregar una imagen bonita en /public/img
+        backgroundImage: 'url("/img/sonrisa-hero.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         color: '#fff',
@@ -30,7 +28,6 @@ function Home() {
         </button>
       </section>
 
-      {/* Sección de servicios */}
       <section style={{ padding: '4rem 2rem', textAlign: 'center' }}>
         <h2 style={{ marginBottom: '3rem', color: '#333' }}>Nuestros Servicios</h2>
         <div style={{
@@ -53,7 +50,6 @@ function Home() {
           ))}
         </div>
       </section>
-
     </div>
   );
 }
