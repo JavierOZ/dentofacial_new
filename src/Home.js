@@ -50,6 +50,27 @@ function Home() {
           ))}
         </div>
       </section>
+
+      {/* Formulario de contacto */}
+      <section id="formulario" style={{ padding: '4rem 2rem', backgroundColor: '#ffffff', textAlign: 'center' }}>
+        <h2 style={{ marginBottom: '2rem', color: '#333' }}>Agenda tu hora</h2>
+        <form action="https://sheetdb.io/api/v1/wy7rmfutsrihe" method="post" style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <input type="text" name="data[nombre]" placeholder="Nombre" required style={inputStyle} />
+          <input type="text" name="data[apellido]" placeholder="Apellido" required style={inputStyle} />
+          <input type="email" name="data[email]" placeholder="Correo electrónico" required style={inputStyle} />
+          <input type="tel" name="data[telefono]" placeholder="+56912345678" required style={inputStyle} />
+          <select name="data[motivo]" required style={inputStyle}>
+            <option value="">Seleccione un motivo</option>
+            {servicios.map((servicio, idx) => (
+              <option key={idx} value={servicio}>{servicio}</option>
+            ))}
+          </select>
+          <input type="date" name="data[fechaDeseada]" required style={inputStyle} />
+          <button type="submit" style={{ padding: '1rem', backgroundColor: '#a051c4', border: 'none', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>
+            Enviar
+          </button>
+        </form>
+      </section>
     </div>
   );
 }
@@ -64,5 +85,12 @@ const servicios = [
   'Tratamiento periodontal',
   'Radiografías dentales',
 ];
+
+const inputStyle = {
+  padding: '0.75rem',
+  borderRadius: '6px',
+  border: '1px solid #ccc',
+  fontSize: '1rem'
+};
 
 export default Home;
