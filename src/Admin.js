@@ -35,32 +35,32 @@ function Admin() {
           style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', marginRight: '0.5rem' }}
         />
         <button
-  onClick={async () => {
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clave }),
-      });
-  
-      const data = await response.json();
-  
-      if (data.success) {
-        setAutenticado(true);
-      } else {
-        alert('Contraseña incorrecta');
-      }
-    } catch (error) {
-      console.error('Error al autenticar:', error);
-      alert('Hubo un problema al intentar ingresar');
-    }
-  }}}
+          onClick={async () => {
+            try {
+              const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ clave }),
+              });
+
+              const data = await response.json();
+
+              if (data.success) {
+                setAutenticado(true);
+              } else {
+                alert('Contraseña incorrecta');
+              }
+            } catch (error) {
+              console.error('Error al autenticar:', error);
+              alert('Hubo un problema al intentar ingresar');
+            }
+          }}
           style={{ padding: '0.5rem 1rem', backgroundColor: '#a051c4', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
         >
           Ingresar
         </button>
       </div>
-    ;
+    );
   }
 
   if (cargando) {
