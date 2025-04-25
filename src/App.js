@@ -21,11 +21,10 @@ function App() {
     }
 
     try {
-      const feriadoCheck = await fetch('https://apis.digital.gob.cl/fl/feriados');
-      const resultadoFeriado = await feriadoCheck.json();
-      const fechaFeriado = resultadoFeriado.find(f => f.fecha === form.fechaDeseada);
+      const checkFeriado = await fetch(`/api/feriados?fecha=${form.fechaDeseada}`);
+      const resultado = await checkFeriado.json();
 
-      if (fechaFeriado) {
+      if (resultado.esFeriado) {
         alert("La fecha seleccionada corresponde a un feriado. Por favor, elige otra.");
         return;
       }
