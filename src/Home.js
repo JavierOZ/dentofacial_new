@@ -16,6 +16,20 @@ function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const dia = new Date(form.fechaDeseada).getDay();
+      if (dia === 0) {
+        setMensaje("❌ No se pueden agendar horas los días domingo.");
+        return;
+      }
+
+      const feriadoResp = await fetch(`/api/feriados?fecha=${form.fechaDeseada}`);
+      const feriadoData = await feriadoResp.json();
+
+      if (feriadoData.esFeriado) {
+        setMensaje("❌ La fecha seleccionada corresponde a un feriado. Elige otro día.");
+        return;
+      }
+
       const payload = {
         data: {
           nombre: form.nombre,
